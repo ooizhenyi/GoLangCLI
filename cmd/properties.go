@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"errors"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -14,7 +15,7 @@ var propertiesCmd = &cobra.Command{
 	Short: "View folder properties",
 	Long:  `Display properties of a folder such as size, creation time, and permissions.`,
 	Args:  cobra.ExactArgs(1),
-	Run: func(cmd *cobra.Command, args []string) {
+	RunE: func(cmd *cobra.Command, args []string) error {
 		dir, _ := cmd.Flags().GetString("dir")
 		folderName := args[0]
 		fullPath := filepath.Join(dir, folderName)
@@ -22,12 +23,12 @@ var propertiesCmd = &cobra.Command{
 		info, err := os.Stat(fullPath)
 		if os.IsNotExist(err) {
 			fmt.Printf("Folder '%s' does not exist\n", folderName)
-			return
+			return err
 		}
 
 		if !info.IsDir() {
 			fmt.Printf("'%s' is not a folder\n", folderName)
-			return
+			return errors.New("Directory provided is not a folder")
 		}
 
 		var size int64
@@ -62,7 +63,10 @@ var propertiesCmd = &cobra.Command{
 		fmt.Printf("  Permissions: %s\n", info.Mode().String())
 		fmt.Printf("  Files: %d\n", fileCount-1)
 		fmt.Printf("  Subfolders: %d\n", folderCount-1)
+
+		return nil 
 	},
+
 }
 
 func formatTime(t time.Time) string {
