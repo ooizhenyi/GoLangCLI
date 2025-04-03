@@ -22,12 +22,11 @@ var moveCmd = &cobra.Command{
 		sourceFolder := filepath.Join(dir, args[0])
 		destinationFolder := filepath.Join(dir, args[1])
 
-		//check folder exist or not
 		if _, err := os.Stat(sourceFolder); os.IsNotExist(err) {
 			fmt.Printf("Folder '%s' does not exists\n", sourceFolder)
 			return err
 		}
-		// Check if destination folder parent exists
+
 		destParent := filepath.Dir(destinationFolder)
 		if _, err := os.Stat(destParent); os.IsNotExist(err) {
 			fmt.Printf("Error destination directory: %v\n", err)

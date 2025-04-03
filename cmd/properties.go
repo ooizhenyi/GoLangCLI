@@ -28,7 +28,7 @@ var propertiesCmd = &cobra.Command{
 
 		if !info.IsDir() {
 			fmt.Printf("'%s' is not a folder\n", folderName)
-			return errors.New("Directory provided is not a folder")
+			return errors.New("directory provided is not a folder")
 		}
 
 		var size int64
@@ -64,9 +64,8 @@ var propertiesCmd = &cobra.Command{
 		fmt.Printf("  Files: %d\n", fileCount-1)
 		fmt.Printf("  Subfolders: %d\n", folderCount-1)
 
-		return nil 
+		return nil
 	},
-
 }
 
 func formatTime(t time.Time) string {

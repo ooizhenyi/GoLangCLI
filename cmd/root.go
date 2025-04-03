@@ -1,6 +1,5 @@
 /*
 Copyright © 2025 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
@@ -10,19 +9,17 @@ import (
 	"github.com/spf13/cobra"
 )
 
-
 var rootCmd = &cobra.Command{
 	Use:   "filemanager",
 	Short: "A file management CLI application",
 	Long: `A file management CLI application that allows you to:
-- Create folders
-- Move folders
-- Delete folders
-- Edit folder names
-- View folder properties
-- View files inside folders`,
+- Create, move, delete, and rename folders
+- View folder properties and contents
+- Search for files and folders
+- Copy, move, and delete files
+- Compress and extract folders
+- And more upcoming!`,
 }
-
 
 func Execute() {
 	err := rootCmd.Execute()
@@ -34,5 +31,3 @@ func Execute() {
 func init() {
 	rootCmd.PersistentFlags().StringP("dir", "d", ".", "Directory to work with")
 }
-
-
